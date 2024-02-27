@@ -1,0 +1,71 @@
+<!DOCTYPE html> 
+<html> 
+ <head> 
+<title>clicking image game</title>
+ <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script> 
+
+    <link href="style2.css" rel="stylesheet" > 
+  </head> 
+
+    <body> 
+
+      <div id="content"> 
+
+        <h1>DANSO CLICKING IMAGE GAME</h1> 
+
+        <p>After clicking "start", you will have 30 seconds to click as many computer images as you can. The computers appear randomly so be ready! </p>
+        
+        <div id="controls">
+
+           <span id="score">0 pts</span> 
+
+          <button type="button" id="start_button">Start!</button> 
+
+        </div>
+
+         <div id="timer">30 seconds left</div> 
+
+         <div id="gamespace"> </div> 
+        </div>
+        <script> var score = 0; var timer = 30; var clock; var t; var randX; var randY; 
+
+          $(document).ready(function () { 
+            firstname=prompt('Enter your first Name:'); 
+
+
+           
+           $("#start_button").click(function () {
+ 
+             startGame();
+             
+             });
+             $("#gamespace").on("click", "img", function () {
+                incScore();
+                $(this).toggle("fold"); 
+                }); 
+                }); 
+                function startGame() { 
+                 decTimer(); 
+                 addComputer(); 
+                 $("#gamespace").css("background-color", "white"); 
+                 $("h1").css("color", "#ff6347"); } 
+                 function randPosX() { 
+                   return Math.floor(Math.random() * 280); } 
+                   function randPosY() { return Math.floor(Math.random() * 500); }
+                    function incScore() { score += 1; $("#score").html(score + " points"); } 
+                    function decTimer() { if (timer < 0) { clearTimeout(clock); }
+                     else { $("#timer").show();
+                      $("#timer").html(timer + " seconds left"); 
+                      clock = setTimeout("decTimer()", 1000); 
+                      timer -= 1; } } 
+                      function addComputer() { 
+                       if (timer < 0) 
+                       { clearTimeout(t);
+                        $('img').remove();/* to remove images after timeout so that the player won't get more points */ 
+                        } else { randX = randPosX(); randY = randPosY();
+                         $("#gamespace").append("<img src='computer.png' style='top:" + randX + "px; left:" + randY + "px; '/>"); 
+                         var r = Math.floor(Math.random() * 2000); 
+                         t = setTimeout(addComputer, r); } } 
+                         </script> 
+       </body> 
+       </html> 

@@ -1,3 +1,6 @@
+<!--NAME:SALIEU DANSO
+CSCI2447 PROJECT 6 DATE:12/5/2023 -->
+
 <!DOCTYPE html> 
 <html> 
  <head> 
@@ -30,13 +33,18 @@
         <script> var score = 0; var timer = 30; var clock; var t; var randX; var randY; 
 
           $(document).ready(function () { 
-            firstname=prompt('Enter your first Name:'); 
+            var firstName=prompt('Enter your first Name:'); 
+           alert("You have entered " + firstName );
+
+           $("p:first").prepend("Are you ready to play the game " + firstName + "? ");
 
 
            
            $("#start_button").click(function () {
  
              startGame();
+             $("#start_button").prop('disabled', true);//disabling the start button
+
              
              });
              $("#gamespace").on("click", "img", function () {
@@ -47,6 +55,8 @@
                 function startGame() { 
                  decTimer(); 
                  addComputer(); 
+                 disappear();
+
                  $("#gamespace").css("background-color", "white"); 
                  $("h1").css("color", "#ff6347"); } 
                  function randPosX() { 
@@ -66,6 +76,13 @@
                          $("#gamespace").append("<img src='computer.png' style='top:" + randX + "px; left:" + randY + "px; '/>"); 
                          var r = Math.floor(Math.random() * 2000); 
                          t = setTimeout(addComputer, r); } } 
+
+                         //function for images to disappear
+                         function disappear() {
+                        $("img").fadeOut();
+
+                         };
+
                          </script> 
        </body> 
        </html> 
